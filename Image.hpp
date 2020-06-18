@@ -19,6 +19,7 @@ private:
 
 public:
 
+
     struct Pixel {
         uint8_t red = 0;
         uint8_t green = 0;
@@ -36,6 +37,10 @@ public:
     Image &operator=(Image &&other) noexcept = default;
 
     virtual ~Image() = default;
+
+    static inline double count_brightness(const Pixel &pixel) {
+        return 0.299 * pixel.red + 0.587 * pixel.green + 0.114 * pixel.blue;
+    }
 
     //virtual Pixel &operator[](const uint64_t t) = 0;
 
