@@ -54,9 +54,11 @@ private:
         uint32_t bf_size;//
         //32 bits reserved
         uint32_t bf_of_bits;
-        template<typename strm>
-        friend strm& operator<<(strm&, const BitMapFileHeader& bmfh);
+
+//        template<typename strm>
+//        friend strm& operator<<(strm&, const BitMapFileHeader& bmfh);
     };
+
     struct BitMapInfoHeader {
         uint32_t width;
         uint32_t height;
@@ -68,9 +70,9 @@ private:
         uint32_t Y_pixels_per_meter;
         uint32_t colors_used;
         uint32_t colors_important;
-        template<typename strm>
-        friend strm& operator<<(strm&, const BitMapInfoHeader& bmih);
 
+//        template<typename Strm>
+//        friend Strm& operator<<(Strm&, const BitMapInfoHeader& bmih);
     };
 
 public:
@@ -80,5 +82,6 @@ public:
 
 
 };
+
 
 #endif //DRAFT_IMAGEBMP_HPP
