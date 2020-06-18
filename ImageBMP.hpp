@@ -16,27 +16,27 @@ using BYTE = uint8_t;
 using LONG = long;
 
 typedef struct tagBITMAPFILEHEADER {
-    WORD bfType;
-    DWORD bfSize;
-    WORD bfReserved1;
-    WORD bfReserved2;
-    DWORD bfOffBits;
+    WORD bfType;//16
+    DWORD bfSize;//32
+    WORD bfReserved1;//16
+    WORD bfReserved2;//16
+    DWORD bfOffBits;//32
 } BITMAPFILEHEADER, *PBITMAPFILEHEADER;
 
 //************************
 
 typedef struct tagBITMAPINFOHEADER {
-    DWORD biSize;
-    LONG biWidth;
-    LONG biHeight;
-    WORD biPlanes;
-    WORD biBitCount;
-    DWORD biCompression;
-    DWORD biSizeImage;
-    LONG biXPelsPerMeter;
-    LONG biYPelsPerMeter;
-    DWORD biClrUsed;
-    DWORD biClrImportant;
+    DWORD biSize;// 32
+    LONG biWidth;//long//32
+    LONG biHeight;//long//32
+    WORD biPlanes;//16
+    WORD biBitCount;//16
+    DWORD biCompression;//32
+    DWORD biSizeImage;//32
+    LONG biXPelsPerMeter;//long//32
+    LONG biYPelsPerMeter;//long//32
+    DWORD biClrUsed;//32
+    DWORD biClrImportant;//32
 } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
 
 
@@ -50,22 +50,26 @@ typedef struct tagRGBQUAD {
 class ImageBMP : public Image {
 private:
     struct BitMapFileHeader{
-        char bf_type[2];
-        uint32_t bf_size;
-        //two bytes reserved
+        unsigned char bf_type[2];//format
+        uint32_t bf_size;//
+        //32 bits reserved
         uint32_t bf_of_bits;
+        template<typename strm>
+        friend strm& operator<<(strm&, const BitMapFileHeader& bmfh);
     };
     struct BitMapInfoHeader {
         uint32_t width;
         uint32_t height;
-        uint8_t planes;
-        uint8_t bit_cnt;
-        uint8_t compression;
+        uint16_t planes;
+        uint16_t bit_cnt;
+        uint32_t compression;
         uint32_t img_size;
         uint32_t X_pixels_per_meter;
         uint32_t Y_pixels_per_meter;
         uint32_t colors_used;
         uint32_t colors_important;
+        template<typename strm>
+        friend strm& operator<<(strm&, const BitMapInfoHeader& bmih);
 
     };
 
