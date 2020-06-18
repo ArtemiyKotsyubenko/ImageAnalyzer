@@ -13,8 +13,8 @@ struct BMP_image_tag;
 //template<typename ImageTag>
 class Image {
 private:
-    uint64_t height_;
-    uint64_t width_;
+    //uint64_t height_ = 0;
+    //uint64_t width_ = 0;
 
 
 public:
@@ -24,6 +24,8 @@ public:
         uint8_t green = 0;
         uint8_t blue = 0;
     };
+
+    Image() = default;
 
     Image(const Image &other) = default;
 
@@ -35,13 +37,13 @@ public:
 
     virtual ~Image() = default;
 
-    virtual Pixel &operator[](const uint64_t t) = 0;
+    //virtual Pixel &operator[](const uint64_t t) = 0;
 
-    virtual const Pixel &operator[](const uint64_t t) const = 0;
+    //virtual const Pixel &operator[](const uint64_t t) const = 0;
 
-    inline uint64_t height() const noexcept { return height_; }
+    //virtual inline uint64_t height() const noexcept =0;
 
-    inline uint64_t width() const noexcept { return width_; }
+    //virtual inline uint64_t width() const noexcept = 0;
 
 };
 

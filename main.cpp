@@ -5,27 +5,25 @@
 #include <iostream>
 #include <fstream>
 #include <cstdint>
-typedef uint32_t DWORD;   // DWORD = unsigned 32 bit value
-typedef uint16_t WORD;    // WORD = unsigned 16 bit value
-typedef uint8_t BYTE;     // BYTE = unsigned 8 bit value
-typedef long LONG;
-
-
-
-
-
-
+#include "ImageBMP.hpp"
 int main(){
     int cnt = 0;
 
-    std::ifstream strm("01 (1).bmp");
+    std::ifstream strm("1.bmp");
+    std::ofstream fout ("test.bmp");
+    ImageBMP img(strm);
+    img.print();
 
-    while (strm.peek()!= EOF){
-        strm.get();
-        ++cnt;
-    }
+    img.dump(fout, strm);
+    //std::cout << static_cast<u_char>(0b01001101u);
 
-    std::cout << cnt;
+//    while (strm.peek()!= EOF){
+//        strm.get();
+//        ++cnt;
+//    }
 
+    //std::cout << cnt;
+    //int  a = 0b1110'0010'101'0'0000'0000'0000'000;
     return 0;
+
 }
