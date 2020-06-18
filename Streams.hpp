@@ -20,6 +20,8 @@ public:
         }
     }
 
+    inline std::ofstream& operator()(){return file;}
+
     ~Ofstream() {
         file.close();
     }
@@ -37,6 +39,8 @@ public:
             exit(1);
         }
     }
+
+    inline std::ifstream& operator()(){return file;}
 
     ~Ifstream() {
         file.close();

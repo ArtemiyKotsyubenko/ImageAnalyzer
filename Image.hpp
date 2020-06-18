@@ -10,7 +10,7 @@
 
 struct BMP_image_tag;
 
-template<typename ImageTag>
+//template<typename ImageTag>
 class Image {
 private:
     uint64_t height_;
