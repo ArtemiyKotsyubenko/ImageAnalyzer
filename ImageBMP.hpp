@@ -61,16 +61,16 @@ public:
         strm >> bmfh;
         strm >> bmih;
 
-        if (bmih.colors_used == 0 || bmih.colors_used ==  256){
+        if (bmih.colors_used == 0 || bmih.colors_used == 256) {
             palette.resize(256);
-        } else if ( bmih.colors_used == 4){
+        } else if (bmih.colors_used == 4) {
             palette.resize(16);
-        } else if (bmih.colors_used == 1){
+        } else if (bmih.colors_used == 1) {
             palette.resize(2);
         }
 
 
-        for(auto& it : palette){
+        for (auto &it : palette) {
             it.blue = strm.get();
             it.green = strm.get();
             it.red = strm.get();
@@ -83,30 +83,32 @@ public:
 
         uint8_t extra_cells = (bmih.width % 4 == 0) ? 0 : 4 - (bmih.width % 4);
 
-        for(auto & row: img){
+        for (auto &row: img) {
             row.resize(extra_cells + bmih.width);
         }
 
         for (int i = 0; i < bmih.height; ++i) {
-            for (int j = 0; j < bmih.width; ++j) {
+            //for (int j = 0; j < bmih.width; ++j) {
+            for (int j = 0; j < img[i].size(); ++j) {
                 img[i][j] = strm.get();
             }
         }
 
     }
 
-    void dump(std::ofstream& fout, std::ifstream& fin){// DEBUG
+    void dump(std::ofstream &fout, std::ifstream &fin) {// DEBUG
         fin.seekg(0);
-        for(int i = 0; i < bmfh.bf_of_bits; ++i){
-            fout.put( fin.get());
+        for (int i = 0; i < bmfh.bf_of_bits; ++i) {
+            fout.put(fin.get());
         }
 
-        for(int  i = 0; i < bmih.height; ++i){
+        for (int i = 0; i < bmih.height; ++i) {
             for (int j = 0; j < bmih.width; ++j) {
                 fout.put(img[i][j]);
             }
         }
     }
+
     void print() {// DEBUG
         std::cout << static_cast<unsigned char >(bmfh.bf_type >> 8)
                   << static_cast<unsigned char >(bmfh.bf_type & 0b11111111u) << '\n';
@@ -125,6 +127,11 @@ public:
                   << "colors important : " << bmih.colors_important;
 
     }
+
+
+    inline uint64_t height() const noexcept override { return bmih.height; };
+
+    inline uint64_t width() const noexcept override { return bmih.width; };
 
 };
 

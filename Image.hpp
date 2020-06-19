@@ -39,16 +39,13 @@ public:
     virtual ~Image() = default;
 
     static inline double count_brightness(const Pixel &pixel) {
-        return 0.299 * pixel.red + 0.587 * pixel.green + 0.114 * pixel.blue;
+        return 0.2126 * pixel.red + 0.7152 * pixel.green + 0.0722 * pixel.blue;
     }
 
-    //virtual Pixel &operator[](const uint64_t t) = 0;
 
-    //virtual const Pixel &operator[](const uint64_t t) const = 0;
+    virtual inline uint64_t height() const noexcept =0;
 
-    //virtual inline uint64_t height() const noexcept =0;
-
-    //virtual inline uint64_t width() const noexcept = 0;
+    virtual inline uint64_t width() const noexcept = 0;
 
 };
 
