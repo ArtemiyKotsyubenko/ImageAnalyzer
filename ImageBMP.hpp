@@ -16,7 +16,7 @@ private:
 
     struct BitMapFileHeader {
         uint16_t bf_type = 0;
-        uint32_t bf_size = 0;//
+        uint32_t bf_size = 0;
         //32 bits reserved
         uint32_t legacy = 0;
         uint16_t legacy_1;
@@ -25,6 +25,7 @@ private:
     } bmfh;
 
     struct BitMapInfoHeader {
+        //WINAPY - weight 0f the struct
         uint32_t legacy = 0;
         uint32_t width = 0;
         uint32_t height = 0;
@@ -70,11 +71,6 @@ private:
     };
 
 public:
-    void palette__(){
-        for(auto &it : palette){
-            std::cout << (int )it.red << ' ' << (int)it.green << ' ' << (int)it.blue << '\n';
-        }
-    }
 
     ImageBMP(std::ifstream &strm) {
         strm >> bmfh;
@@ -107,43 +103,10 @@ public:
         }
 
         for (int i = 0; i < bmih.height; ++i) {
-            //for (int j = 0; j < bmih.width; ++j) {
             for (int j = 0; j < img[i].size(); ++j) {
                 img[i][j] = strm.get();
             }
         }
-
-    }
-
-    void dump(std::ofstream &fout, std::ifstream &fin) {// DEBUG
-        fin.seekg(0);
-        for (int i = 0; i < bmfh.bf_of_bits; ++i) {
-            fout.put(fin.get());
-        }
-
-        for (int i = 0; i < bmih.height; ++i) {
-            for (int j = 0; j < bmih.width; ++j) {
-                fout.put(img[i][j]);
-            }
-        }
-    }
-
-    void print() {// DEBUG
-        std::cout << static_cast<unsigned char >(bmfh.bf_type >> 8)
-                  << static_cast<unsigned char >(bmfh.bf_type & 0b11111111u) << '\n';
-        std::cout << "size : " << bmfh.bf_size << '\n';
-        std::cout << "img begin : " << bmfh.bf_of_bits << "\n***\n";
-
-        std::cout << "img width : " << bmih.width << '\n'
-                  << "img height : " << bmih.height << '\n'
-                  << "img planes : " << bmih.planes << '\n'
-                  << "bit cnt : " << bmih.bit_cnt << '\n'
-                  << "img compression : " << bmih.compression << '\n'
-                  << "img size : " << bmih.img_size << '\n'
-                  << "X : " << bmih.X_pixels_per_meter << '\n'
-                  << "Y : " << bmih.Y_pixels_per_meter << '\n'
-                  << "colors used : " << bmih.colors_used << '\n'
-                  << "colors important : " << bmih.colors_important;
 
     }
 
