@@ -6,15 +6,19 @@
 #include <fstream>
 #include <cstdint>
 #include "ImageBMP.hpp"
+#include "Img_analyzer.hpp"
 int main(){
     int cnt = 0;
 
-    std::ifstream strm("1.bmp");
+    std::ifstream strm("low.bmp");
     std::ofstream fout ("test.bmp");
     ImageBMP img(strm);
-    img.print();
+    //img.palette__();
+    //img.print();
+    std::cout << Analyser(img);
 
-    img.dump(fout, strm);
+
+    //img.dump(fout, strm);
     //std::cout << static_cast<u_char>(0b01001101u);
 
 //    while (strm.peek()!= EOF){

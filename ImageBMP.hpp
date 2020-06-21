@@ -10,6 +10,7 @@
 #include "Image.hpp"
 #include "Buffer.hpp"
 
+
 class ImageBMP : public Image {
 private:
 
@@ -52,11 +53,29 @@ public:
     };
 
 private:
+
+
+
     std::vector<PixelBMP> palette;
 
-    void read_pallete();
+    struct proxy{
+    private:
+        const std::vector<PixelBMP>& palette_;
+        const std::vector<uint8_t>& row_;
+    public:
+        proxy( const std::vector<PixelBMP>& palette, const std::vector<uint8_t>& row): palette_(palette), row_(row){}
+        const PixelBMP& operator[](const uint64_t index) const {
+            return palette_[row_[index]];
+        }
+    };
 
 public:
+    void palette__(){
+        for(auto &it : palette){
+            std::cout << (int )it.red << ' ' << (int)it.green << ' ' << (int)it.blue << '\n';
+        }
+    }
+
     ImageBMP(std::ifstream &strm) {
         strm >> bmfh;
         strm >> bmih;
@@ -128,13 +147,12 @@ public:
 
     }
 
-
     inline uint64_t height() const noexcept override { return bmih.height; };
 
     inline uint64_t width() const noexcept override { return bmih.width; };
 
-    std::vector<uint8_t>& operator[](const uint64_t index){ return img[index];}
-    const std::vector<uint8_t>& operator[](const uint64_t index) const { return img[index];}
+    //proxy operator[](const uint64_t index){ return proxy(palette, img[index]);}
+    const proxy operator[](const uint64_t index) const { return proxy(palette, img[index]);}
 
 };
 
