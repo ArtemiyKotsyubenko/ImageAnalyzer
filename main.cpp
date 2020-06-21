@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdint>
 #include "ImageBMP.hpp"
 #include "Img_analyzer.hpp"
 

@@ -8,7 +8,7 @@
 #include <iosfwd>
 #include <vector>
 #include "Image.hpp"
-#include "Buffer.hpp"
+//#include "Buffer.hpp"
 
 
 class ImageBMP : public Image {
