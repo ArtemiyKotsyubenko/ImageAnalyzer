@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 
 struct ImgAnalyser {
 private:

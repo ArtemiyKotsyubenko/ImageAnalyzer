@@ -18,7 +18,6 @@ private:
         uint16_t bf_type = 0;
         uint32_t bf_size = 0;
         //32 bits reserved
-        uint32_t legacy = 0;
         uint16_t legacy_1;
         uint16_t legacy_2;
         uint32_t bf_of_bits = 0;
