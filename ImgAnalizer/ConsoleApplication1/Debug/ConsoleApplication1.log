@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\artem\source\repos\ImgAnalizer\ConsoleApplication1\ImageBMP.hpp(68,34): warning C4244: аргумент: преобразование "const uint64_t" в "const unsigned int", возможна потеря данных
+C:\Users\artem\source\repos\ImgAnalizer\ConsoleApplication1\ImageBMP.hpp(105,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\artem\source\repos\ImgAnalizer\ConsoleApplication1\ImageBMP.hpp(106,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\artem\source\repos\ImgAnalizer\ConsoleApplication1\ImageBMP.hpp(117,84): warning C4244: аргумент: преобразование "const uint64_t" в "const unsigned int", возможна потеря данных
+C:\Users\artem\source\repos\ImgAnalizer\ConsoleApplication1\Img_analyzer.hpp(32,49): warning C4244: аргумент: преобразование "double" в "const unsigned int", возможна потеря данных
+  ConsoleApplication1.vcxproj -> C:\Users\artem\source\repos\ImgAnalizer\Debug\ConsoleApplication1.exe
