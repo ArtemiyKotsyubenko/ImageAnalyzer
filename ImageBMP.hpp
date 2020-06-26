@@ -8,6 +8,7 @@
 #include <iosfwd>
 #include <vector>
 #include "Image.hpp"
+#include <fstream>
 //#include "Buffer.hpp"
 
 
@@ -83,8 +84,9 @@ public:
             palette.resize(2);
         }
 
-
+        char temp;
         for (auto &it : palette) {
+            strm.read(&temp, sizeof(u_char));
             it.blue = strm.get();
             it.green = strm.get();
             it.red = strm.get();
